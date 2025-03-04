@@ -10,7 +10,6 @@ import { weatherApi } from '../../services/weather/weather';
 function Weather() {
   const [city, setCity] = useState(''); 
   const [weather, setWeather] = useState<any | null>(null); 
-  const [forecast, setForecast] = useState<any | null>(null); 
   const [error, setError] = useState<string | null>(null); 
   const [searchHistory, setSearchHistory] = useState<any[]>([]);
 
@@ -18,27 +17,21 @@ function Weather() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    navigate('/login', { replace: true });
+    navigate('/');
   };
 
   const handleSearch = async (city: string) => {
-    try {
-      setError(null); 
-      const data = await weatherApi.getWeatherByCity(city); 
-      setWeather(data); 
-      setCity(''); 
-    } catch (err) {
-      setError('City not found'); 
-      setWeather(null); 
-    }
-    try {
-      const data = await weatherApi.getForecastByCity(city); 
-      setForecast(data); 
-      setCity(''); 
-    } catch (err) {
-      setError('City not found!'); 
-      setForecast(null); 
-    }
+     try {
+       setError(null);
+       const weatherData = await
+         weatherApi.getWeatherByCity(city);
+
+       setWeather(weatherData);
+       setCity('');
+     } catch (err) {
+       setError('City not found');
+       setWeather(null);
+     }
   };
 
   const handlesubmit =(e: React.FormEvent<HTMLFormElement>)=>{
@@ -58,14 +51,6 @@ function Weather() {
       searchHistory.filter(item => item.name !== historyItem.name) 
     );
   };
-
-  useEffect(() => {
-    fetch('https://ip-api.com/json/')
-      .then(res => res.json())
-      .then(data => {
-        handleSearch(data.city); 
-      });
-  }, []);
 
   return (
     <div className="background w-full h-screen flex justify-center items-center">

@@ -10,7 +10,7 @@ import { ImGoogle2 } from 'react-icons/im';
 import { IoLogoLinkedin } from 'react-icons/io';
 import { MdOutlineMail } from 'react-icons/md';
 import wind from './../../assets/images/wind.png';
-import { Bounce, toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { registers } from '../../services/register/register';
 import Loading from '../Loading/Loading';
 import { IoEyeOffOutline } from 'react-icons/io5';

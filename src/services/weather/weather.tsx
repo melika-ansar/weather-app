@@ -10,12 +10,4 @@ export const weatherApi = {
     const response = await axios.get(url);
     return response.data;
   },
-
-  getForecastByCity: async (city: string) => {
-    const url = `${BASE_URL_W}/forecast?q=${city}&appid=${API_KEY_W}&units=metric`;
-    console.log('Request URL:', url);
-
-    const response = await axios.get(url);
-    return response.data;
-  },
 };
